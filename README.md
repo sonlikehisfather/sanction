@@ -120,21 +120,22 @@ npm run register:slash
 
 
 
-- `&ban <user> [reason]` - Ban a user
+- `&ban <user> [duration] [reason]` - Ban a user
 
 - `&unban <user>` - Unban a user
 
 - `&baninfo <user>` - View ban information for a user
 
-- `&banuser [user]` - View bans performed by a user (defaults to self if no argument)
+- `&banuser [user]` - View bans performed by a user (defaults to self)
 
-- `&blacklist <user> [reason]` - Blacklist a user
+- `&blacklist <user> [duration] [reason]` - Blacklist a user
+- `&bl <user> [duration] [reason]` - Alias for blacklist
 
 - `&unblacklist <user>` - Remove blacklist from a user
 
 - `&blinfo <user>` - View blacklist information for a user
 
-- `&bluser [user]` - View blacklists performed by a user (defaults to self if no argument)
+- `&bluser [user]` - View blacklists performed by a user (defaults to self)
 
 - `&to <user> <duration> [reason]` - Timeout a user
 
@@ -152,33 +153,37 @@ npm run register:slash
 
 
 
-- `/botconfig` - Configure bot settings (roles, cooldowns, limits, toggles) - Owner only
+- `/botconfig` - Open the interactive bot configuration panel (owners only)
 
-- `/punition <user> <duration>` - Apply a temporary punishment restricting ban/blacklist/unblacklist actions - Owner only
+- `/invite` - Get the bot invite link (primary owner only)
 
-- `/protect-user <user>` - Toggle protected user status - Owner only
+- `/bl-acces` - Manage server whitelist access (administrator only)
 
-- `/invite` - Get bot invite link - Owner only
+- `/protect-user` - Toggle protected user status (owners only)
+
+- `/punition` - Apply a temporary punishment blocking ban/blacklist/unblacklist (owners only)
 
 
+
+### History & Lookup Commands (Prefix)
+
+
+
+- `&listsanctions <user> [type]` - View sanction history for a user
+- `&sanctions <user> [type]` - Alias for listsanctions
+- `&sanction <user> [type]` - Alias for listsanctions
+- `&list <user> [type]` - Alias for listsanctions
+- `&infosanction <id> <@user>` - View detailed sanction information
+- `&sanctioninfo <id> <@user>` - Alias for infosanction
+- `&sinfo <id> <@user>` - Alias for infosanction
 
 ### Administrative Commands (Prefix)
 
-
-
-- `&owner add|del|list <user>` - Owner management
-
-- `&config toggle|roles|cooldown|limit` - Bot configuration
-
-- `&backup create|restore|list` - Backup management
-
-- `&listsanctions <user> [type]` - View sanction history
-
-- `&infosanction <id>` - View detailed information about a specific sanction
-
-- `&clearsanctions <user>` - Clear all sanctions for a user
-
-- `&wlbl <user>` - Whitelist/blacklist user for command access
+- `&owner [id|@user]` - List owners or toggle owner status
+- `&backup` - Open the backup management panel (owners only)
+- `&clear-sanctions <user> [reason]` - Clear all sanctions for a user
+- `&clearsanctions <user> [reason]` - Alias for clear-sanctions
+- `&clearsanction <user> [reason]` - Alias for clear-sanctions
 
 
 
