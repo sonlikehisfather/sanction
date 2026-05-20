@@ -20,7 +20,7 @@ const INTERNAL_REVOKE_REASON = 'Levée manuelle';
 
 module.exports = {
 
-  description: 'Retirer le mute d\'un membre',
+  description: 'Retirer le mute',
 
   actionKey: ActionKeys.UNMUTE,
 

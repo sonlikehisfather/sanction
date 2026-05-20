@@ -2,32 +2,32 @@ const helpCategories = {
   sanctions: {
     id: 'sanctions',
     label: 'Sanctions',
-    description: 'Appliquer des sanctions immédiates (ban, kick, mute, warn, blacklist, etc.).'
+    description: 'Appliquer les sanctions',
   },
   revocations: {
     id: 'revocations',
     label: 'Levées de sanction',
-    description: 'Lever ou annuler une sanction active.'
+    description: 'Lever une sanction',
   },
   history: {
     id: 'history',
     label: 'Historique',
-    description: 'Consulter les sanctions enregistrées et leurs détails.'
+    description: 'Consulter les sanctions',
   },
   owners: {
     id: 'owners',
     label: 'Owners',
-    description: 'Gérer la liste des owners autorisés à administrer le bot.'
+    description: 'Gérer les owners',
   },
   config: {
     id: 'config',
     label: 'Configuration',
-    description: 'Adapter les paramètres du bot (rôles, limites, toggles, etc.).'
+    description: 'Adapter les paramètres du bot',
   },
   assistance: {
     id: 'assistance',
     label: 'Assistance',
-    description: 'Commandes utilitaires et informations sur le bot.'
+    description: 'Commandes utilitaires',
   }
 };
 
@@ -36,7 +36,7 @@ const helpEntries = {
     key: 'ban',
     label: 'Ban',
     category: 'sanctions',
-    description: 'Bannit un membre définitivement ou pour une durée optionnelle.',
+    description: 'Ban un membre',
     usage: {
       prefix: '&ban @utilisateur [durée] <raison>'
     },
@@ -52,7 +52,7 @@ const helpEntries = {
     key: 'kick',
     label: 'Kick',
     category: 'sanctions',
-    description: 'Expulse un membre du serveur et consigne l\'action.',
+    description: 'Kick un membre du serveur',
     usage: {
       prefix: '&kick @utilisateur <raison>'
     },
@@ -68,7 +68,7 @@ const helpEntries = {
     key: 'unban',
     label: 'Unban',
     category: 'revocations',
-    description: 'Lève un ban actif et journalise la levée.',
+    description: 'Débannit un membre',
     usage: {
       prefix: '&unban @utilisateur'
     },
@@ -85,7 +85,7 @@ const helpEntries = {
     key: 'warn',
     label: 'Warn',
     category: 'sanctions',
-    description: 'Ajoute un avertissement via le même menu interactif que tempmute.',
+    description: 'Avertir un membre',
     usage: {
       prefix: '&warn @utilisateur'
     },
@@ -98,7 +98,7 @@ const helpEntries = {
     key: 'mute',
     label: 'Mute',
     category: 'sanctions',
-    description: 'Applique un timeout (conversation muette). Durée optionnelle.',
+    description: 'Mute un membre (timeout Discord)',
     usage: {
       prefix: '&mute @utilisateur [durée] <raison>'
     },
@@ -113,7 +113,7 @@ const helpEntries = {
     key: 'tempmute',
     label: 'TempMute',
     category: 'sanctions',
-    description: 'Mute temporaire via menu catégorie puis durée (rôle Mute).',
+    description: 'Mute temporaire avec rôle',
     usage: {
       prefix: '&tempmute @utilisateur'
     },
@@ -160,7 +160,7 @@ const helpEntries = {
     key: 'blacklist',
     label: 'Blacklist',
     category: 'sanctions',
-    description: 'Sanction maximale : ban permanent du serveur, plus fort qu\'un ban classique.',
+    description: 'Blacklist un membre',
     usage: {
       prefix: '&bl — liste paginée\n&bl <id|@user> [durée] <raison>'
     },
@@ -179,7 +179,7 @@ const helpEntries = {
     key: 'unblacklist',
     label: 'Unblacklist',
     category: 'revocations',
-    description: 'Retire une blacklist serveur et débannit l\'utilisateur.',
+    description: 'Retire la blacklist d\'un membre',
     usage: {
       prefix: '&unbl @utilisateur'
     },
@@ -196,7 +196,7 @@ const helpEntries = {
     key: 'listsanctions',
     label: 'Liste des sanctions',
     category: 'history',
-    description: 'Affiche les sanctions enregistrées pour un membre.',
+    description: 'Voir l\'historique des sanctions',
     usage: {
       prefix: '&listsanctions @utilisateur [type]'
     },
@@ -212,7 +212,7 @@ const helpEntries = {
     key: 'owner',
     label: 'Owner',
     category: 'owners',
-    description: 'Liste les owners ou bascule le statut owner d’un utilisateur.',
+    description: 'Gérer les owners du bot',
     usage: {
       prefix: '&owner [id|@utilisateur]'
     },
@@ -225,7 +225,7 @@ const helpEntries = {
     key: 'backup',
     label: 'Backup',
     category: 'owners',
-    description: 'Panneau interactif des sauvegardes.',
+    description: 'Gérer les sauvegardes',
     usage: {
       prefix: '&backup'
     },
@@ -238,7 +238,7 @@ const helpEntries = {
     key: 'configToggle',
     label: 'Config toggle',
     category: 'config',
-    description: 'Active ou désactive une option majeure du bot.',
+    description: 'Activer/désactiver une option du bot',
     usage: {
       prefix: '&config toggle <option> <on|off>'
     },
@@ -251,7 +251,7 @@ const helpEntries = {
     key: 'configRoles',
     label: 'Config rôles',
     category: 'config',
-    description: 'Définit les rôles autorisés pour une action modération.',
+    description: 'Définir les rôles pour une action',
     usage: {
       prefix: '&config roles <action> <@role...>'
     },
@@ -264,7 +264,7 @@ const helpEntries = {
     key: 'configCooldown',
     label: 'Config cooldown',
     category: 'config',
-    description: 'Ajuste le cooldown d\'une action (en secondes).',
+    description: 'Régler le cooldown d\'une action',
     usage: {
       prefix: '&config cooldown <action> <secondes>'
     },
@@ -277,7 +277,7 @@ const helpEntries = {
     key: 'configLimit',
     label: 'Config limite',
     category: 'config',
-    description: 'Fixe une limite d’utilisation pour une action, avec fenêtre personnalisable.',
+    description: 'Définir une limite d\'utilisation',
     usage: {
       prefix: '&config limit <action> <valeur> [fenetre_en_minutes]'
     },
@@ -290,7 +290,7 @@ const helpEntries = {
     key: 'configBot',
     label: 'Config bot',
     category: 'config',
-    description: 'Panneau de configuration interactif pour owners et sous-owners.',
+    description: 'Paramètres du bot',
     usage: {
       slash: '/botconfig'
     },
@@ -307,7 +307,7 @@ const helpEntries = {
     key: 'clearsanctions',
     label: 'Clear sanctions',
     category: 'sanctions',
-    description: 'Révoque toutes les sanctions actives d\'un utilisateur (ban, mute, blacklist, etc.).',
+    description: 'Effacer toutes les sanctions d\'un membre',
     usage: {
       prefix: '&clear-sanctions @utilisateur raison'
     },
@@ -320,7 +320,7 @@ const helpEntries = {
     key: 'help',
     label: 'Help',
     category: 'assistance',
-    description: 'Affiche ce menu interactif d\'aide.',
+    description: 'Menu d\'aide des commandes',
     usage: {
       prefix: '&help'
     },

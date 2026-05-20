@@ -7,7 +7,7 @@ const help = cloneHelpData(helpEntries.banuser || {
   key: 'banuser',
   label: 'Ban User History',
   category: 'sanctions',
-  description: 'Afficher les bans effectués par un utilisateur',
+  description: 'Voir les bans d\'un mod',
   usage: { prefix: '&banuser <utilisateur>' },
   examples: { prefix: '&banuser @utilisateur' }
 });

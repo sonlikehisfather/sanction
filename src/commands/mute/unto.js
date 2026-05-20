@@ -14,7 +14,7 @@ help.examples.prefix = '&unto @Mina';
 const INTERNAL_REVOKE_REASON = 'Levée manuelle';
 
 module.exports = {
-  description: 'Retirer le timeout d\'un membre',
+  description: 'Retirer le timeout',
   actionKey: ActionKeys.UNMUTE,
   prefix: {
     aliases: ['unto']

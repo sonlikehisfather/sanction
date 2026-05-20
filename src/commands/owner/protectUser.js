@@ -4,7 +4,7 @@ const { buildEmbed } = require('../../utils/embedFactory');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('protect-user')
-    .setDescription('Protect un user')
+    .setDescription('Protéger un utilisateur')
     .addStringOption(option =>
       option.setName('user')
         .setDescription('User à protéger')

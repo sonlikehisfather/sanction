@@ -6,7 +6,7 @@ const help = cloneHelpData(helpEntries.blinfo || {
   key: 'blinfo',
   label: 'Blacklist Info',
   category: 'sanctions',
-  description: 'Afficher les informations sur une blacklist',
+  description: 'Info sur une blacklist',
   usage: { prefix: '&blinfo <utilisateur>' },
   examples: { prefix: '&blinfo @utilisateur' }
 });

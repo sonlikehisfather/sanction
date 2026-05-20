@@ -4,7 +4,7 @@ const { buildEmbed } = require('../../utils/embedFactory');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('bl-acces')
-    .setDescription('Gérer la whitelist du serveur')
+    .setDescription('Gérer la whitelist')
     .addStringOption(opt =>
       opt.setName('option')
         .setDescription('Action à effectuer')

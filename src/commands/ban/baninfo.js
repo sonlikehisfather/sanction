@@ -7,7 +7,7 @@ const help = cloneHelpData(helpEntries.baninfo || {
   key: 'baninfo',
   label: 'Ban Info',
   category: 'sanctions',
-  description: 'Afficher les informations sur un bannissement',
+  description: 'Info sur un ban',
   usage: { prefix: '&baninfo <utilisateur>' },
   examples: { prefix: '&baninfo @utilisateur' }
 });

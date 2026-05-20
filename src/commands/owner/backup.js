@@ -169,7 +169,7 @@ module.exports = {
     key: 'backup',
     label: 'Backup',
     category: 'owners',
-    description: 'Panneau de gestion des sauvegardes (liste, création, suppression).',
+    description: 'Gérer les sauvegardes',
     usage: { prefix: '&backup' },
     examples: { prefix: '&backup' },
     notes: ['Boutons Now / Del / Clear sur le panneau interactif.']

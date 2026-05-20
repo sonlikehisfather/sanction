@@ -4,7 +4,7 @@ const { buildEmbed } = require('../../utils/embedFactory');
 
 const data = new SlashCommandBuilder()
   .setName('punition')
-  .setDescription('Appliquer une punition à un utilisateur (owner only)')
+  .setDescription('Punir un utilisateur')
   .addUserOption(option =>
     option
       .setName('utilisateur')

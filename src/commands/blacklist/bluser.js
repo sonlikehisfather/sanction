@@ -7,7 +7,7 @@ const help = cloneHelpData(helpEntries.bluser || {
   key: 'bluser',
   label: 'Blacklist User History',
   category: 'sanctions',
-  description: 'Afficher les blacklist effectuées par un utilisateur',
+  description: 'Voir les blacklists d\'un mod',
   usage: { prefix: '&bluser <utilisateur>' },
   examples: { prefix: '&bluser @utilisateur' }
 });

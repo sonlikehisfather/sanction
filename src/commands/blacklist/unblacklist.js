@@ -6,7 +6,7 @@ const { createSanctionRevokeCommand } = require('../helpers/createSanctionComman
 const help = cloneHelpData(helpEntries.unblacklist);
 
 module.exports = createSanctionRevokeCommand({
-  description: "Retirer la blacklist serveur et débannir l'utilisateur",
+  description: "Retirer la blacklist d'un utilisateur",
   actionKey: ActionKeys.UNBLACKLIST,
   prefixAliases: ['unblacklist', 'unbl'],
   embedTitle: 'Blacklist serveur retirée',

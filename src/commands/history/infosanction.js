@@ -8,7 +8,7 @@ const help = cloneHelpData(helpEntries.infosanction || {
   key: 'infosanction',
   label: 'Info Sanction',
   category: 'history',
-  description: 'Affiche les détails complets d\'une sanction pour un utilisateur.',
+  description: 'Détails d\'une sanction',
   usage: {
     prefix: '&infosanction <sanction_id> <@utilisateur>'
   },

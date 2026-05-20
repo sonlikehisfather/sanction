@@ -58,7 +58,7 @@ module.exports = {
     key: 'owner',
     label: 'Owner',
     category: 'owners',
-    description: 'Liste les owners ou bascule le statut owner d’un utilisateur.',
+    description: 'Gérer les owners du bot',
     usage: { prefix: '&owner [id|@utilisateur]' },
     examples: { prefix: '&owner @Staff' },
     notes: ['Sans argument : affiche la liste.', 'Avec un ID : ajoute ou retire (toggle).']

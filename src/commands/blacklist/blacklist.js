@@ -90,7 +90,7 @@ const handleApply = async (context) => {
 
 module.exports = {
   type: 'apply',
-  description: 'Blacklist serveur',
+  description: 'Blacklist un membre',
   prefix: {
     aliases: ['blacklist', 'bl']
   },

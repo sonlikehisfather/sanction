@@ -148,11 +148,11 @@ class CommandRegistry {
   getSlashCommandData() {
     const botconfigBuilder = new SlashCommandBuilder()
       .setName(BOTCONFIG_SLASH_NAME)
-      .setDescription('Ouvre le panneau de configuration interactif du bot.');
+      .setDescription('Configuration du bot');
 
     const inviteBuilder = new SlashCommandBuilder()
       .setName(INVITE_SLASH_NAME)
-      .setDescription('Obtenir le lien d\'invitation du bot.');
+      .setDescription('Lien d\'invitation du bot');
 
     const wlblBuilder = wlblModule.data;
     const protectUserBuilder = protectUserModule.data;
