@@ -10,7 +10,7 @@ Discord moderation bot with full sanction management, supporting both slash and 
 
 
 
-1. Copy `config.js` and replace the placeholder values:
+1. Go in `.env` and replace the placeholder values:
 
    - `token`: Discord bot token.
 
