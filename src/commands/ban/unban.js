@@ -5,7 +5,16 @@ const { buildUnbanSuccessEmbed, INTERNAL_REVOKE_REASON } = require('../../utils/
 
 const help = cloneHelpData(helpEntries.unban);
 
+const name = 'unban';
+const description = 'Débannit un membre.';
+const usage = 'unban <membre>';
+const aliases = ['unban'];
+
 module.exports = {
+  name,
+  description,
+  usage,
+  aliases,
   prefix: { aliases: ['unban'] },
   handlePrefix: async ({ message, args, registry, sanctionService, configService }) => {
     const guild = message.guild;

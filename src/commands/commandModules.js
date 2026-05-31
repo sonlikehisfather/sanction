@@ -7,6 +7,7 @@ module.exports = [
   ...require('./history'),
   ...require('./owner'),
   ...require('./config'),
-  ...require('./invite')
+  ...require('./invite'),
+  require('./help')
 ];
 

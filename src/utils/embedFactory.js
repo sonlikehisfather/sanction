@@ -2,7 +2,14 @@ const { EmbedBuilder } = require('discord.js');
 
 const buildEmbed = (configService, { title, description, fields = [], thumbnail, timestamp = true, color, footerText, footerIcon, suppressFooter = false }) => {
   const embed = new EmbedBuilder();
-  embed.setColor(color || configService.getColor());
+  const resolvedColor = color || configService.getColor();
+  // Safety check: ensure color is valid for Discord.js
+  const finalColor = typeof resolvedColor === 'string' && /^#[0-9A-Fa-f]{6}$/.test(resolvedColor)
+    ? resolvedColor
+    : typeof resolvedColor === 'number'
+      ? resolvedColor
+      : '#5865F2';
+  embed.setColor(finalColor);
   if (title) {
     embed.setTitle(title);
   }

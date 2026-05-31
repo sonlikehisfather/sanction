@@ -88,9 +88,17 @@ const handleApply = async (context) => {
   }
 };
 
+const name = 'blacklist';
+const description = 'Blacklist un membre.';
+const usage = 'blacklist <membre> [durée] [raison]';
+const aliases = ['blacklist', 'bl'];
+
 module.exports = {
+  name,
+  description,
+  usage,
+  aliases,
   type: 'apply',
-  description: 'Blacklist un membre',
   prefix: {
     aliases: ['blacklist', 'bl']
   },

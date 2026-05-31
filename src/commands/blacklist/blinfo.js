@@ -11,7 +11,16 @@ const help = cloneHelpData(helpEntries.blinfo || {
   examples: { prefix: '&blinfo @utilisateur' }
 });
 
+const name = 'blinfo';
+const description = 'Affiche les informations sur une blacklist.';
+const usage = 'blinfo <membre>';
+const aliases = ['blinfo'];
+
 module.exports = {
+  name,
+  description,
+  usage,
+  aliases,
   prefix: { aliases: ['blinfo'] },
   handlePrefix: async ({ message, args, registry, db, configService, sanctionService }) => {
     const guild = message.guild;
@@ -47,7 +56,7 @@ module.exports = {
       
       if (!blacklist) {
         const embed = {
-          color: parseInt(configService.get('color').replace('#', ''), 16),
+          color: parseInt(configService.getColor().replace('#', ''), 16),
           description: '✗ Aucune blacklist trouvée pour cet utilisateur.'
         };
         await message.reply({ embeds: [embed] });
@@ -60,17 +69,17 @@ module.exports = {
       const executorIsOwner = db.isOwner(executorMember.id);
 
       const embed = {
-        color: parseInt(configService.get('color').replace('#', ''), 16),
+        color: parseInt(configService.getColor().replace('#', ''), 16),
         title: 'Informations sur la Blacklist',
         fields: [
           {
-            name: '👤 Auteur :',
-            value: isBanned ? `\`\`\`\n❌\n\`\`\`` : (byOwner && !executorIsOwner ? `\`\`\`\nOwner\n\`\`\`` : `\`\`\`\nNom d'utilisateur : ${executorUser?.username || 'Inconnu'}\nIdentifiant : ${blacklist.executor_id}\n\`\`\``),
+            name: '👤 > Auteur',
+            value: isBanned ? `\`\`\`\n❌\n\`\`\`` : (byOwner && !executorIsOwner ? `\`\`\`\nOwner\n\`\`\`` : `\`\`\`\n> Nom d'utilisateur ${executorUser?.username || 'Inconnu'}\n> Identifiant ${blacklist.executor_id}\n\`\`\``),
             inline: false
           },
           {
-            name: '📄 Informations :',
-            value: `\`\`\`\nRaison : ${blacklist.reason || '-'}\n\`\`\``,
+            name: '📄 > Informations',
+            value: `\`\`\`\n> Raison ${blacklist.reason || '-'}\n\`\`\``,
             inline: false
           }
         ],

@@ -12,7 +12,16 @@ const help = cloneHelpData(helpEntries.banuser || {
   examples: { prefix: '&banuser @utilisateur' }
 });
 
+const name = 'banuser';
+const description = 'Liste les bans effectués par un modérateur.';
+const usage = 'banuser [modérateur]';
+const aliases = ['banuser'];
+
 module.exports = {
+  name,
+  description,
+  usage,
+  aliases,
   prefix: { aliases: ['banuser'] },
   handlePrefix: async ({ message, args, registry, db, configService }) => {
     const guild = message.guild;
@@ -54,7 +63,7 @@ module.exports = {
       
       if (sanctions.length === 0) {
         const embed = {
-          color: parseInt(configService.get('color').replace('#', ''), 16),
+          color: parseInt(configService.getColor().replace('#', ''), 16),
           description: `✗ Aucun ban effectué par ${targetUser.username}.`
         };
         await message.reply({ embeds: [embed] });

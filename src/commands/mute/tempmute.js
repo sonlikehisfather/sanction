@@ -18,7 +18,16 @@ const ensureGuildAndPermission = async ({ guild, member, userId, registry, reply
   return true;
 };
 
+const name = 'tempmute';
+const description = 'Mute temporaire un membre avec rôle.';
+const usage = 'tempmute <membre>';
+const aliases = ['tempmute', 'tm'];
+
 module.exports = {
+  name,
+  description,
+  usage,
+  aliases,
   prefix: {
     aliases: ['tempmute', 'tm']
   },

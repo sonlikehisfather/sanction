@@ -12,7 +12,16 @@ const help = cloneHelpData(helpEntries.baninfo || {
   examples: { prefix: '&baninfo @utilisateur' }
 });
 
+const name = 'baninfo';
+const description = 'Affiche les informations sur un bannissement.';
+const usage = 'baninfo <membre>';
+const aliases = ['baninfo'];
+
 module.exports = {
+  name,
+  description,
+  usage,
+  aliases,
   prefix: { aliases: ['baninfo'] },
   handlePrefix: async ({ message, args, registry, db, configService, sanctionService }) => {
     const guild = message.guild;
@@ -53,26 +62,26 @@ module.exports = {
           const executorUser = await message.client.users.fetch(blacklist.executor_id).catch(() => null);
           const byOwner = sanctionService.wasBlacklistedByOwner(blacklist);
           const embed = {
-            color: parseInt(configService.get('color').replace('#', ''), 16),
+            color: parseInt(configService.getColor().replace('#', ''), 16),
             title: 'Informations sur le Bannissement',
             fields: [
               {
-                name: '👤 Utilisateur :',
-                value: `\`\`\`\nNom d'utilisateur : ${targetUser.username}\nIdentifiant : ${targetUser.id}\n\`\`\``,
+                name: '👤 > Utilisateur',
+                value: `\`\`\`\n> Nom d'utilisateur ${targetUser.username}\n> Identifiant ${targetUser.id}\n\`\`\``,
                 inline: false
               },
               {
-                name: '📄 Informations :',
-                value: `\`\`\`\nRaison : ${blacklist.reason || '-'} [BL${byOwner ? ' par Sys+' : ''}]\n\`\`\``,
+                name: '📄 > Informations',
+                value: `\`\`\`\n> Raison ${blacklist.reason || '-'} [BL${byOwner ? ' par Sys+' : ''}]\n\`\`\``,
                 inline: false
               },
               {
-                name: '🧑‍✈️ Modérateur :',
+                name: '🧑‍✈️ > Modérateur',
                 value: `\`\`\`\n❌\n\`\`\``,
                 inline: false
               },
               {
-                name: '📅 Date :',
+                name: '📅 > Date',
                 value: `<t:${Math.floor(blacklist.created_at / 1000)}:F>`,
                 inline: false
               }
@@ -83,7 +92,7 @@ module.exports = {
         }
         
         const embed = {
-          color: parseInt(configService.get('color').replace('#', ''), 16),
+          color: parseInt(configService.getColor().replace('#', ''), 16),
           description: '✗ Aucun bannissement trouvé pour cet utilisateur.'
         };
         await message.reply({ embeds: [embed] });
@@ -103,26 +112,26 @@ module.exports = {
       });
 
       const embed = {
-        color: parseInt(configService.get('color').replace('#', ''), 16),
+        color: parseInt(configService.getColor().replace('#', ''), 16),
         title: 'Informations sur le Bannissement',
         fields: [
           {
-            name: '👤 Utilisateur :',
-            value: `\`\`\`\nNom d'utilisateur : ${targetUser.username}\nIdentifiant : ${targetUser.id}\n\`\`\``,
+            name: '👤 > Utilisateur',
+            value: `\`\`\`\n> Nom d'utilisateur ${targetUser.username}\n> Identifiant ${targetUser.id}\n\`\`\``,
             inline: false
           },
           {
-            name: '📄 Informations :',
-            value: `\`\`\`\nRaison : ${ban.reason}\n\`\`\``,
+            name: '📄 > Informations',
+            value: `\`\`\`\n> Raison ${ban.reason}\n\`\`\``,
             inline: false
           },
           {
-            name: '🧑‍✈️ Modérateur :',
-            value: isBlacklisted ? `\`\`\`\n❌\n\`\`\`` : `\`\`\`\nNom d'utilisateur : ${executorUser?.username || 'Inconnu'}\nIdentifiant : ${ban.executor_id}\n\`\`\``,
+            name: '🧑‍✈️ > Modérateur',
+            value: isBlacklisted ? `\`\`\`\n❌\n\`\`\`` : `\`\`\`\n> Nom d'utilisateur ${executorUser?.username || 'Inconnu'}\n> Identifiant ${ban.executor_id}\n\`\`\``,
             inline: false
           },
           {
-            name: '📅 Date :',
+            name: '📅 > Date',
             value: `<t:${Math.floor(ban.created_at / 1000)}:F>`,
             inline: false
           }

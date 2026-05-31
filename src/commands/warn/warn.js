@@ -18,7 +18,16 @@ const ensureGuildAndPermission = async ({ guild, member, userId, registry, reply
   return true;
 };
 
+const name = 'warn';
+const description = 'Avertit un membre.';
+const usage = 'warn <membre>';
+const aliases = ['warn'];
+
 module.exports = {
+  name,
+  description,
+  usage,
+  aliases,
   prefix: {
     aliases: ['warn']
   },

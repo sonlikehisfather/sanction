@@ -1,7 +1,16 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const { buildEmbed } = require('../../utils/embedFactory');
 
+const name = 'protect-user';
+const description = 'Protège un utilisateur contre les sanctions.';
+const usage = '/protect-user <user>';
+const aliases = [];
+
 module.exports = {
+  name,
+  description,
+  usage,
+  aliases,
   data: new SlashCommandBuilder()
     .setName('protect-user')
     .setDescription('Protéger un utilisateur')

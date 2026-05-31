@@ -122,15 +122,15 @@ const buildBotconfigMainEmbed = (configService, notice) => {
 
     fields: [
 
-      { name: 'Cooldown', value: 'Ajuster le délai entre deux utilisations.', inline: true },
+      { name: '・Cooldown', value: 'Ajuster le délai entre deux utilisations.', inline: true },
 
-      { name: 'Limite', value: 'Définir une limite par unité de temps.', inline: true },
+      { name: '・Limite', value: 'Définir une limite par unité de temps.', inline: true },
 
-      { name: 'Rôles', value: 'Gérer les rôles autorisés.', inline: true },
+      { name: '・Rôles', value: 'Gérer les rôles autorisés.', inline: true },
 
-      { name: 'Raison', value: 'Forcer la raison (global ou par commande) et définir les rôles bypass.', inline: false },
+      { name: '・Raison', value: 'Forcer la raison (global ou par commande) et définir les rôles bypass.', inline: false },
 
-      { name: 'Options', value: 'Comportements globaux du bot.', inline: true }
+      { name: '・Options', value: 'Comportements globaux du bot.', inline: true }
 
     ]
 
@@ -194,7 +194,7 @@ const buildActionSelectEmbed = (configService, categoryLabel, description) =>
 
     description,
 
-    fields: [{ name: 'Étape', value: 'Sélectionnez l’option ci-dessous puis confirmez.', inline: false }]
+    fields: [{ name: '・Étape', value: 'Sélectionnez l’option ci-dessous puis confirmez.', inline: false }]
 
   });
 
@@ -208,7 +208,7 @@ const buildToggleSelectionEmbed = (configService) =>
 
     description: 'Choisissez une option à activer ou désactiver.',
 
-    fields: [{ name: 'Conseil', value: 'Si nécessaire, ré-appuyez sur Retour pour annuler.', inline: false }]
+    fields: [{ name: '・Conseil', value: 'Si nécessaire, ré-appuyez sur Retour pour annuler.', inline: false }]
 
   });
 
@@ -228,7 +228,7 @@ const buildReasonCategoryEmbed = (configService) =>
 
       {
 
-        name: 'Global',
+        name: '・Global',
 
         value: configService.isReasonRequired() ? 'Raison obligatoire pour toutes les commandes (sauf override par commande).' : 'Raison libre par défaut (sauf override par commande).',
 
@@ -236,7 +236,7 @@ const buildReasonCategoryEmbed = (configService) =>
 
       },
 
-      { name: 'Étape suivante', value: 'Choisissez le paramètre global ou une commande ci-dessous.', inline: false }
+      { name: '・Étape suivante', value: 'Choisissez le paramètre global ou une commande ci-dessous.', inline: false }
 
     ]
 
@@ -254,7 +254,7 @@ const buildReasonGlobalEmbed = (configService) =>
 
     fields: [
 
-      { name: 'État actuel', value: configService.isReasonRequired() ? 'Raison obligatoire' : 'Raison libre', inline: false }
+      { name: '・État actuel', value: configService.isReasonRequired() ? 'Raison obligatoire' : 'Raison libre', inline: false }
 
     ]
 
@@ -292,13 +292,13 @@ const buildCommandReasonEmbed = (configService, commandKey) => {
 
     fields: [
 
-      { name: 'État actuel', value: stateLabel, inline: false },
+      { name: '・État actuel', value: stateLabel, inline: false },
 
-      { name: 'Effet réel', value: configService.isReasonRequired(commandKey) ? 'Raison exigée à l’exécution' : 'Raison optionnelle', inline: false },
+      { name: '・Effet réel', value: configService.isReasonRequired(commandKey) ? 'Raison exigée à l’exécution' : 'Raison optionnelle', inline: false },
 
-      { name: 'Rôles bypass', value: bypassList, inline: false },
+      { name: '・Rôles bypass', value: bypassList, inline: false },
 
-      { name: 'Remarque', value: 'Les rôles bypass peuvent exécuter la commande sans raison même si elle est obligatoire.', inline: false }
+      { name: '・Remarque', value: 'Les rôles bypass peuvent exécuter la commande sans raison même si elle est obligatoire.', inline: false }
 
     ]
 
@@ -316,7 +316,7 @@ const buildConfirmationEmbed = (configService, description, title = 'Confirmatio
 
     description,
 
-    fields: [{ name: 'Dernière étape', value: 'Confirmez votre réglage à l’aide du bouton ci-dessous.', inline: false }]
+    fields: [{ name: '・Dernière étape', value: 'Confirmez votre réglage à l’aide du bouton ci-dessous.', inline: false }]
 
   });
 
@@ -340,9 +340,9 @@ const buildLimitConfigEmbed = (configService, action, currentConfig) => {
 
     fields: [
 
-      { name: 'État actuel', value: `• Fenêtre : ${formatDurationDisplay(currentWindow)}\n• Limite : ${limitDisplay}`, inline: false },
+      { name: '・État actuel', value: `• Fenêtre : ${formatDurationDisplay(currentWindow)}\n• Limite : ${limitDisplay}`, inline: false },
 
-      { name: 'Procédure', value: '1. Choisissez Minute / Heure / Jour.\n2. Indiquez le nombre et la durée souhaités.\n3. La configuration sera appliquée sous la forme « 3 par 20 min ».', inline: false }
+      { name: '・Procédure', value: '1. Choisissez Minute / Heure / Jour.\n2. Indiquez le nombre et la durée souhaités.\n3. La configuration sera appliquée sous la forme « 3 par 20 min ».', inline: false }
 
     ]
 
@@ -366,9 +366,9 @@ const buildCooldownConfigEmbed = (configService, action, currentConfig) => {
 
     fields: [
 
-      { name: 'Cooldown actuel', value: `• ${formatDurationDisplay(currentCooldown / 1000)}`, inline: false },
+      { name: '・Cooldown actuel', value: `• ${formatDurationDisplay(currentCooldown / 1000)}`, inline: false },
 
-      { name: 'Indication', value: 'Saisissez 0 pour désactiver le cooldown.', inline: false }
+      { name: '・Indication', value: 'Saisissez 0 pour désactiver le cooldown.', inline: false }
 
     ]
 
@@ -482,7 +482,7 @@ const buildBotconfigStateMenuEmbed = (configService) =>
 
     fields: [
 
-      { name: 'Sections disponibles', value: 'Paramètres globaux, actions et réglages de raison par commande.', inline: false }
+      { name: '・Sections disponibles', value: 'Paramètres globaux, actions et réglages de raison par commande.', inline: false }
 
     ]
 
@@ -508,7 +508,7 @@ const buildBotconfigStateSectionEmbed = (configService, permissionService, comma
 
       description: 'Comportements généraux du bot de sanctions.',
 
-      fields: [{ name: 'Paramètres globaux', value: toggleStatus, inline: false }]
+      fields: [{ name: '・Paramètres globaux', value: toggleStatus, inline: false }]
 
     });
 
@@ -522,7 +522,7 @@ const buildBotconfigStateSectionEmbed = (configService, permissionService, comma
 
     const actionFields = chunkStateLines(actionLines, 10).map((lines, index) => ({
 
-      name: index === 0 ? 'Actions : limites/cooldown/rôles' : '​',
+      name: index === 0 ? '・Actions — limites/cooldown/rôles' : '​',
 
       value: lines,
 
@@ -550,7 +550,7 @@ const buildBotconfigStateSectionEmbed = (configService, permissionService, comma
 
   const commandFields = chunkStateLines(commandLines, 8).map((lines, index) => ({
 
-    name: index === 0 ? 'Commandes : raison et bypass' : '​',
+    name: index === 0 ? '・Commandes — raison et bypass' : '​',
 
     value: lines,
 

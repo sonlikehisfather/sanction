@@ -1,5 +1,14 @@
+const name = 'invite';
+const description = 'Génère un lien d\'invitation pour le bot.';
+const usage = '/invite';
+const aliases = [];
+
 module.exports = [
   {
+    name,
+    description,
+    usage,
+    aliases,
     handleSlash: async ({ interaction, configService }) => {
       const primaryOwnerId = configService.get('ownerId');
 
@@ -15,7 +24,7 @@ module.exports = [
       const inviteLink = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&permissions=8&scope=bot%20applications.commands`;
 
       const embed = {
-        color: parseInt(configService.get('color').replace('#', ''), 16),
+        color: parseInt(configService.getColor().replace('#', ''), 16),
         description: `[Cliquez ici pour inviter le bot](${inviteLink})`,
         footer: {
           text: configService.get('footer')

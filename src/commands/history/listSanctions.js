@@ -29,9 +29,9 @@ const describeSanction = (sanction, memberIndex) => {
     : 'N/A';
 
   return `**Sanction ID #${memberIndex}** — ${typeDisplay}
-├ Raison : ${sanction.reason || 'N/A'}
-├ Date : ${dateStr}
-└ Statut : ${sanction.active ? ' Active' : ' Révoquée'}`;
+├ > Raison ${sanction.reason || 'N/A'}
+├ > Date ${dateStr}
+└ > Statut ${sanction.active ? ' Active' : ' Révoquée'}`;
 };
 
 const buildListingEmbed = (configService, targetTag, sanctions, indexMap, page = 1) => {
@@ -48,7 +48,7 @@ const buildListingEmbed = (configService, targetTag, sanctions, indexMap, page =
 
   return buildEmbed(configService, {
     title: `Sanctions de ${targetTag}`,
-    description: `**Total :** ${sanctions.length}\n\n${description}\n\n**Page ${page}/${totalPages}**`
+    description: `**> Total** ${sanctions.length}\n\n${description}\n\n**> Page** ${page}/${totalPages}`
   });
 };
 
@@ -75,7 +75,16 @@ const buildPaginationRow = (currentPage, totalPages) => {
 
 const help = cloneHelpData(helpEntries.listsanctions);
 
+const name = 'listsanctions';
+const description = 'Liste les sanctions d\'un membre.';
+const usage = 'listsanctions <membre> [type]';
+const aliases = ['listsanctions', 'sanctions', 'sanction', 'list'];
+
 module.exports = {
+  name,
+  description,
+  usage,
+  aliases,
   prefix: {
     aliases: ['listsanctions', 'sanctions', 'sanction', 'list']
   },

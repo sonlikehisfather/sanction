@@ -47,8 +47,8 @@ const FLOW_DEFINITIONS = {
       });
     },
     buildSuccessFields: ({ categoryConfig, stepConfig }) => [
-      { name: 'Catégorie', value: categoryConfig.label, inline: false },
-      { name: 'Durée', value: stepConfig.label, inline: true }
+      { name: '・Catégorie', value: categoryConfig.label, inline: false },
+      { name: '・Durée', value: stepConfig.label, inline: true }
     ]
   },
   warn: {
@@ -75,8 +75,8 @@ const FLOW_DEFINITIONS = {
         reason
       }),
     buildSuccessFields: ({ categoryConfig, stepConfig }) => [
-      { name: 'Categorie', value: categoryConfig.label, inline: false },
-      { name: 'Motif', value: extractMotifLabel(stepConfig.label), inline: true }
+      { name: '・Categorie', value: categoryConfig.label, inline: false },
+      { name: '・Motif', value: extractMotifLabel(stepConfig.label), inline: true }
     ]
   }
 };
@@ -103,7 +103,7 @@ const buildCategoryEmbed = (configService, definition, targetUser) =>
     .setColor(configService.getColor())
     .setTitle(definition.categoryTitle)
     .setDescription(
-      `**Utilisateur:** <@${targetUser.id}> (\`${targetUser.id}\`)\n\nChoisissez la categorie.`
+      `**Utilisateur ・** <@${targetUser.id}> (\`${targetUser.id}\`)\n\nChoisissez la categorie.`
     )
     .setFooter({ text: configService.getFooter() })
     .setTimestamp();
@@ -162,7 +162,7 @@ const applyCategorizedSanction = async ({
   const successEmbed = buildEmbed(configService, {
     title: definition.successTitle,
     fields: [
-      { name: 'Utilisateur', value: `<@${targetUser.id}>`, inline: true },
+      { name: '・Utilisateur', value: `<@${targetUser.id}>`, inline: true },
       ...definition.buildSuccessFields({ categoryConfig, stepConfig, reason })
     ]
   });
@@ -265,7 +265,7 @@ const handleCategorizedSanctionInteraction = async (interaction, { flowPrefix, c
       .setColor(configService.getColor())
       .setTitle(`${definition.stepTitlePrefix} - ${categoryConfig.label}`)
       .setDescription(
-        `**Utilisateur:** <@${targetUserId}>\n**Categorie:** ${categoryConfig.label}\n\n${definition.stepPrompt}`
+        `**Utilisateur ・** <@${targetUserId}>\n**Categorie ・** ${categoryConfig.label}\n\n${definition.stepPrompt}`
       )
       .setFooter({ text: configService.getFooter() })
       .setTimestamp();

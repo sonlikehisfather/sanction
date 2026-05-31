@@ -5,28 +5,42 @@ const { parseUserSanctionListButtonId, buildUserSanctionListEmbed, buildUserSanc
 const { handleBlacklistListPagination } = require('../utils/blacklistListHelpers');
 const { decodeActionId, buildBotconfigMainEmbed, buildBotconfigMainComponents } = require('../utils/botconfigHelpers');
 const { buildEmbed } = require('../utils/embedFactory');
-const backupCommand = require('../commands/owner/backup');
 const listSanctions = require('../commands/history/listSanctions');
 
 const setupInteractionHandlers = (client, commandRegistry, sanctionService, configService, permissionService, db) => {
   
   client.on(Events.InteractionCreate, async (interaction) => {
     if (interaction.isButton()) {
-      if (!(await assertMessageInvoker(interaction))) {
+      const customId = interaction.customId;
+
+      // Gérer le déploiement des commandes depuis le panel owner
+      if (customId.startsWith('owner_ping_deploy_')) {
+        const guildId = configService.get('guildId');
+        const guild = client.guilds.cache.get(guildId);
+        
+        if (!guild) {
+          await interaction.reply({ content: `✗ Le bot n'est pas sur le serveur configuré (${guildId})`, ephemeral: true });
+          return;
+        }
+        
+        await interaction.reply({ content: '⏳ Déploiement en cours...', ephemeral: true });
+        
+        (async () => {
+          try {
+            const result = await commandRegistry.registerSlashCommandsForGuild(guildId);
+            await interaction.editReply({ 
+              content: `✓ ${result.count} commandes déployées sur **${guild.name}**` 
+            });
+          } catch (error) {
+            console.error('[DeployUI] Error:', error);
+            await interaction.editReply({ content: `✗ Erreur: ${error.message}` });
+          }
+        })();
         return;
       }
 
-      const customId = interaction.customId;
-
-      if (customId.startsWith('backup_') && typeof backupCommand.handleBackupInteraction === 'function') {
-        const handled = await backupCommand.handleBackupInteraction(interaction, {
-          registry: commandRegistry,
-          backupService: commandRegistry.backupService,
-          configService
-        });
-        if (handled) {
-          return;
-        }
+      if (!(await assertMessageInvoker(interaction))) {
+        return;
       }
 
       if (customId === 'listprev' || customId === 'listnext') {
@@ -327,13 +341,17 @@ const setupInteractionHandlers = (client, commandRegistry, sanctionService, conf
         return;
       }
 
-      if (customId.startsWith('categorized_sanction_')) {
-        await handleCategorizedSanctionInteraction(interaction, {
-          registry: commandRegistry,
-          sanctionService,
-          configService
+      // Gérer les flux de sanctions catégorisées (warn, tempmute, etc.)
+      const flowPrefix = customId.split('_')[0];
+      if (['warn', 'tempmute'].includes(flowPrefix)) {
+        const handled = await handleCategorizedSanctionInteraction(interaction, {
+          flowPrefix,
+          configService,
+          sanctionService
         });
-        return;
+        if (handled) {
+          return;
+        }
       }
     }
   });
@@ -453,6 +471,16 @@ const setupInteractionHandlers = (client, commandRegistry, sanctionService, conf
         components: buildBotconfigMainComponents()
       });
       return;
+    }
+
+    // Catch-all pour les interactions non reconnues (bot redémarré ou interaction expirée)
+    if (interaction.isButton() || interaction.isStringSelectMenu()) {
+      if (!interaction.replied && !interaction.deferred) {
+        await interaction.reply({
+          content: "L'interaction a expiré ou le bot a redémarré. Veuillez relancer la commande.",
+          flags: MessageFlags.Ephemeral
+        }).catch(() => {});
+      }
     }
   });
 

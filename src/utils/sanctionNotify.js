@@ -11,19 +11,19 @@ const buildSanctionDmContent = ({ guildName, sanctionType, reason, durationMs, m
   switch (sanctionType) {
     case SanctionTypes.BAN:
       return hasDuration
-        ? `Vous avez été **ban** sur \`${guildName}\` pour une durée de **${durationLabel}**, pour la raison suivante : \`${safeReason}\``
-        : `Vous avez été **définitivement ban** sur \`${guildName}\` pour la raison suivante : \`${safeReason}\``;
+        ? `Vous avez été **banni** sur \`${guildName}\` pour une durée de **${durationLabel}**, pour la raison suivante : \`${safeReason}\``
+        : `Vous avez été **définitivement banni** sur \`${guildName}\` pour la raison suivante : \`${safeReason}\``;
 
     case SanctionTypes.TEMPBAN:
-      return `Vous avez été **ban** sur \`${guildName}\` pour **${durationLabel || 'une durée limitée'}**, pour la raison suivante : \`${safeReason}\``;
+      return `Vous avez été **banni** sur \`${guildName}\` pour **${durationLabel || 'une durée limitée'}**, pour la raison suivante : \`${safeReason}\``;
 
     case SanctionTypes.BLACKLIST:
       return hasDuration
-        ? `Vous avez été **blacklist** sur \`${guildName}\` pour une durée de **${durationLabel}**, pour la raison suivante : \`${safeReason}\``
+        ? `Vous avez été **blacklisté** sur \`${guildName}\` pour une durée de **${durationLabel}**, pour la raison suivante : \`${safeReason}\``
         : `Vous avez été **définitivement blacklisté** sur \`${guildName}\` pour la raison suivante : \`${safeReason}\``;
 
     case SanctionTypes.TEMPBLACKLIST:
-      return `Vous avez été **blacklist** sur \`${guildName}\` pour **${durationLabel || 'une durée limitée'}**, pour la raison suivante : \`${safeReason}\``;
+      return `Vous avez été **blacklisté** sur \`${guildName}\` pour **${durationLabel || 'une durée limitée'}**, pour la raison suivante : \`${safeReason}\``;
 
     case SanctionTypes.MUTE:
       if (muteMethod === 'timeout') {

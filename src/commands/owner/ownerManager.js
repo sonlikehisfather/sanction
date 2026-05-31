@@ -17,7 +17,16 @@ const buildOwnersEmbed = (configService, permissionService) => {
   });
 };
 
+const name = 'owner';
+const description = 'Gère les owners du bot.';
+const usage = 'owner [membre]';
+const aliases = ['owner'];
+
 module.exports = {
+  name,
+  description,
+  usage,
+  aliases,
   prefix: {
     aliases: ['owner']
   },

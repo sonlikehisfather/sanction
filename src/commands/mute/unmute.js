@@ -16,11 +16,16 @@ const help = cloneHelpData(helpEntries.unmute);
 
 const INTERNAL_REVOKE_REASON = 'Levée manuelle';
 
-
+const name = 'unmute';
+const description = 'Retire le mute d\'un membre.';
+const usage = 'unmute <membre>';
+const aliases = ['unmute'];
 
 module.exports = {
-
-  description: 'Retirer le mute',
+  name,
+  description,
+  usage,
+  aliases,
 
   actionKey: ActionKeys.UNMUTE,
 

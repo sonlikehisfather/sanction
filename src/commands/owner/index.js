@@ -1,5 +1,7 @@
 module.exports = [
   require('./ownerManager'),
-  require('./backup'),
-  require('./protectUser')
+  require('./protectUser'),
+  require('./setprefix'),
+  require('./setcolor'),
+  require('./delPunition')
 ];

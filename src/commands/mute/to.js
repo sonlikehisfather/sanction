@@ -9,7 +9,16 @@ help.label = 'To';
 help.usage.prefix = '&To @utilisateur [durée] <raison>';
 help.examples.prefix = '&To @Noé 30m Spam emoji';
 
+const name = 'to';
+const description = 'Timeout un membre.';
+const usage = 'to <membre> [durée] [raison]';
+const aliases = ['to', 'timeout'];
+
 module.exports = createSanctionApplyCommand({
+  name,
+  description,
+  usage,
+  aliases,
   description: 'Timeout un membre',
   durationOption: {
     mode: 'optional',

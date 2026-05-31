@@ -5,7 +5,16 @@ const { createSanctionRevokeCommand } = require('../helpers/createSanctionComman
 
 const help = cloneHelpData(helpEntries.unblacklist);
 
+const name = 'unblacklist';
+const description = 'Retire la blacklist d\'un membre.';
+const usage = 'unblacklist <membre>';
+const aliases = ['unblacklist', 'unbl'];
+
 module.exports = createSanctionRevokeCommand({
+  name,
+  description,
+  usage,
+  aliases,
   description: "Retirer la blacklist d'un utilisateur",
   actionKey: ActionKeys.UNBLACKLIST,
   prefixAliases: ['unblacklist', 'unbl'],

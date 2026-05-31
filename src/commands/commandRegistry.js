@@ -7,6 +7,7 @@ const inviteModule = require('./invite');
 const wlblModule = require('./whitelist/wlbl');
 const protectUserModule = require('./owner/protectUser');
 const punitionModule = require('./owner/punition');
+const delPunitionModule = require('./owner/delPunition');
 
 const { formatDuration } = require('../utils/time');
 const { resolveCommandTarget } = require('./helpers/resolveCommandTarget');
@@ -19,9 +20,11 @@ const BOTCONFIG_SLASH_NAME = 'botconfig';
 const INVITE_SLASH_NAME = 'invite';
 const BL_ACCES_SLASH_NAME = 'bl-acces';
 const PUNITION_SLASH_NAME = 'punition';
+const DEL_PUNITION_SLASH_NAME = 'del-punition';
 
 const replyGuardError = async (configService, { message, interaction }, text) => {
-  const payload = replyCommandError(configService, text, configService.getPrefix());
+  const guildId = message?.guild?.id || interaction?.guild?.id;
+  const payload = replyCommandError(configService, text, configService.getPrefix(guildId));
   if (interaction) {
     await interaction.reply({ ...payload, flags: MessageFlags.Ephemeral }).catch(() => {});
   } else if (message) {
@@ -47,14 +50,13 @@ const handleSlashCommand = async (module, commandName, context) => {
 
 class CommandRegistry {
 
-  constructor({ client, configService, sanctionService, permissionService, cooldownService, db, backupService }) {
+  constructor({ client, configService, sanctionService, permissionService, cooldownService, db }) {
     this.client = client;
     this.configService = configService;
     this.sanctionService = sanctionService;
     this.permissionService = permissionService;
     this.cooldownService = cooldownService;
     this.db = db;
-    this.backupService = backupService;
     this.commandModules = Array.isArray(commandModules) ? commandModules : [];
     this.prefixCommands = new Collection();
     this.prefixGroups = new Map();
@@ -157,8 +159,9 @@ class CommandRegistry {
     const wlblBuilder = wlblModule.data;
     const protectUserBuilder = protectUserModule.data;
     const punitionBuilder = punitionModule.data;
+    const delPunitionBuilder = delPunitionModule.data;
 
-    return [botconfigBuilder.toJSON(), inviteBuilder.toJSON(), wlblBuilder.toJSON(), protectUserBuilder.toJSON(), punitionBuilder.toJSON()];
+    return [botconfigBuilder.toJSON(), inviteBuilder.toJSON(), wlblBuilder.toJSON(), protectUserBuilder.toJSON(), punitionBuilder.toJSON(), delPunitionBuilder.toJSON()];
   }
 
   async handleSlashInteraction(interaction) {
@@ -174,6 +177,8 @@ class CommandRegistry {
       await handleSlashCommand(protectUserModule, 'protect-user', context);
     } else if (interaction.commandName === PUNITION_SLASH_NAME) {
       await handleSlashCommand(punitionModule, 'punition', context);
+    } else if (interaction.commandName === DEL_PUNITION_SLASH_NAME) {
+      await handleSlashCommand(delPunitionModule, 'del-punition', context);
     }
   }
 
@@ -186,7 +191,7 @@ class CommandRegistry {
       return;
     }
 
-    const prefix = this.configService.getPrefix();
+    const prefix = this.configService.getPrefix(message.guild.id);
 
     if (!message.content.toLowerCase().startsWith(prefix.toLowerCase())) {
       return;
@@ -267,8 +272,7 @@ class CommandRegistry {
       configService: this.configService,
       cooldownService: this.cooldownService,
       db: this.db,
-      client: this.client,
-      backupService: this.backupService
+      client: this.client
     };
   }
 
@@ -282,8 +286,7 @@ class CommandRegistry {
       configService: this.configService,
       cooldownService: this.cooldownService,
       db: this.db,
-      client: this.client,
-      backupService: this.backupService
+      client: this.client
     };
   }
 
@@ -314,7 +317,7 @@ class CommandRegistry {
       if (allowed && allowed.reason === 'punished') {
         const { EmbedBuilder } = require('discord.js');
         const embed = new EmbedBuilder()
-          .setColor(parseInt(this.configService.get('color').replace('#', ''), 16))
+          .setColor(this.configService.getColor())
           .setDescription('✗ Vous êtes puni. Vous ne pouvez pas utiliser cette commande.')
           .setFooter({ text: this.configService.get('footer') });
         
@@ -425,101 +428,71 @@ class CommandRegistry {
   async registerSlashCommands() {
 
     const token = this.configService.get('token');
-
     const clientId = this.configService.get('clientId');
-
     const guildId = this.configService.get('guildId');
 
-
+    console.log(`[Startup] Register slash commands - guildId: ${guildId}, clientId: ${clientId ? 'OK' : 'MISSING'}`);
 
     if (!clientId) {
-
       console.warn('clientId non défini; enregistrement de /botconfig ignoré.');
-
       return;
-
     }
-
-
 
     if (!token || token.startsWith('REPLACE')) {
-
       console.warn('Token Discord invalide; enregistrement de /botconfig ignoré.');
-
       return;
-
     }
-
-
 
     const rest = new REST({ version: '10' }).setToken(token);
-
     const commandsData = this.getSlashCommandData();
 
-
-
-    try {
-
-      const globalCommands = await rest.get(Routes.applicationCommands(clientId));
-
-      const globalCmdArray = Array.isArray(globalCommands) ? globalCommands : [];
-
-      for (const cmd of globalCmdArray) {
-
-        await rest.delete(Routes.applicationCommand(clientId, cmd.id));
-
-      }
-
-
-
-      if (guildId) {
-
-        const guildCommands = await rest.get(Routes.applicationGuildCommands(clientId, guildId));
-
-        const guildCmdArray = Array.isArray(guildCommands) ? guildCommands : [];
-
-        for (const cmd of guildCmdArray) {
-
-          await rest.delete(Routes.applicationGuildCommand(clientId, guildId, cmd.id));
-
-        }
-
-      }
-
-
-
-      console.log(`cleanup ${globalCmdArray.length}`);
-
-    } catch (error) {
-
-      console.error('cleanup error:', error);
-
-    }
-
-
+    console.log(`[Startup] Deploying ${commandsData.length} commands...`);
 
     try {
-
       if (guildId) {
-
         await rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commandsData });
-
-        console.log(`register guild ${guildId}`);
-
+        console.log(`[Startup] Successfully registered ${commandsData.length} commands to guild ${guildId}`);
       } else {
-
         await rest.put(Routes.applicationCommands(clientId), { body: commandsData });
-
-        console.log('register global');
-
+        console.log(`[Startup] Successfully registered ${commandsData.length} commands globally`);
       }
-
     } catch (error) {
+      console.error('[Startup] Register error:', error.message);
+    }
+  }
 
-      console.error('register error:', error);
+  async registerSlashCommandsForGuild(guildId) {
+    const token = this.configService.get('token');
+    const clientId = this.configService.get('clientId');
 
+    if (!clientId || !token || token.startsWith('REPLACE')) {
+      throw new Error('ClientId ou Token invalide');
     }
 
+    const rest = new REST({ version: '10' }).setToken(token);
+    const commandsData = this.getSlashCommandData();
+
+    try {
+      console.log(`[Deploy] Starting deployment for guild ${guildId}...`);
+      console.log(`[Deploy] ClientId: ${clientId}, Commands: ${commandsData.length}`);
+      
+      // Timeout de 15 secondes pour l'appel API
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
+      
+      // Le PUT remplace automatiquement toutes les commandes existantes
+      const result = await rest.put(Routes.applicationGuildCommands(clientId, guildId), { 
+        body: commandsData,
+        signal: controller.signal
+      });
+      
+      clearTimeout(timeout);
+      console.log(`[Deploy] Success! Deployed ${result.length} commands`);
+      return { success: true, count: commandsData.length };
+    } catch (error) {
+      console.error(`[Deploy] Error :`, error.message, error.code);
+      throw new Error(`Erreur d'enregistrement: ${error.message}`);
+    }
   }
 
 

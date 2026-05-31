@@ -28,27 +28,27 @@ const buildSanctionDetailEmbed = (configService, sanction, events = [], requeste
 
   const fields = [
     {
-      name: 'Type',
+      name: '> Type',
       value: typeLine,
       inline: true
     },
     {
-      name: 'Raison',
+      name: '> Raison',
       value: sanction.reason || 'N/A',
       inline: true
     },
     {
-      name: 'Date',
+      name: '> Date',
       value: `${createdDate}${expiresDate}`,
       inline: true
     },
     {
-      name: 'Appliquée par',
+      name: '> Appliquée par',
       value: `<@${sanction.executor_id}>`,
       inline: true
     },
     {
-      name: 'Utilisateur sanctionné',
+      name: '> Utilisateur sanctionné',
       value: sanction.target_tag || `<@${sanction.target_id}>`,
       inline: true
     }
@@ -58,7 +58,7 @@ const buildSanctionDetailEmbed = (configService, sanction, events = [], requeste
     const eventList = events
       .map(e => `• ${e.action} par <@${e.actor_id}> ${discordTimestamp(e.timestamp, 'R')}`)
       .join('\n');
-    fields.push({ name: 'Événements', value: eventList, inline: false });
+    fields.push({ name: '> Événements', value: eventList, inline: false });
   }
 
   let footer = null;
@@ -89,7 +89,16 @@ function _twoDigits(n) {
   return n < 10 ? `0${n}` : `${n}`;
 }
 
+const name = 'infosanction';
+const description = "Affiche les détails d'une sanction.";
+const usage = 'infosanction <id> <membre>';
+const aliases = ['infosanction', 'sanctioninfo', 'si'];
+
 module.exports = {
+  name,
+  description,
+  usage,
+  aliases,
   prefix: {
     aliases: ['infosanction', 'sanctioninfo', 'sinfo']
   },

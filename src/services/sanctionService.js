@@ -1,13 +1,5 @@
 const fs = require('fs').promises;
-const fsSync = require('fs');
 const path = require('path');
-const zlib = require('zlib');
-
-class BackupService {
-  constructor(config) {
-    this.config = config;
-  }
-}
 
 const { Collection } = require('discord.js');
 const { SanctionTypes } = require('../utils/actionKeys');

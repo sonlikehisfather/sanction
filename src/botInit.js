@@ -6,7 +6,6 @@ const { PermissionService } = require('./services/permissionService');
 const { CooldownService } = require('./services/cooldownService');
 const { SanctionService } = require('./services/sanctionService');
 const { CommandRegistry } = require('./commands/commandRegistry');
-const { BackupService } = require('./services/backupService');
 const { setupDiscordEvents } = require('./events/discordEvents');
 const { setupInteractionHandlers } = require('./events/interactionHandlers');
 
@@ -28,27 +27,24 @@ const initializeBot = () => {
   const permissionService = new PermissionService(db, configService);
   const cooldownService = new CooldownService(db);
   const sanctionService = new SanctionService({ db, configService, client });
-  const backupService = new BackupService(config);
   const commandRegistry = new CommandRegistry({
     client,
     configService,
     sanctionService,
     permissionService,
     cooldownService,
-    db,
-    backupService
+    db
   });
 
   let schedulerHandle = null;
 
-  setupDiscordEvents(client, db, sanctionService, configService, commandRegistry, backupService, (handle) => { schedulerHandle = handle; });
+  setupDiscordEvents(client, db, sanctionService, configService, commandRegistry, (handle) => { schedulerHandle = handle; });
   setupInteractionHandlers(client, commandRegistry, sanctionService, configService, permissionService, db);
 
   const handleShutdown = () => {
     if (schedulerHandle) {
       clearInterval(schedulerHandle);
     }
-    backupService.stopScheduler();
     client.destroy();
     process.exit(0);
   };

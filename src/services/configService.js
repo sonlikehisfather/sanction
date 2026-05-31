@@ -27,16 +27,37 @@ class ConfigService {
     return Number.isNaN(parsed) ? null : parsed;
   }
 
-  getColor() {
-    return this.get('color') || '#5865F2';
+  getColor(guildId = null) {
+    const color = guildId ? this.db?.getGuildSetting(guildId, 'color') : null;
+    const globalColor = color || this.get('color');
+    if (typeof globalColor === 'string' && /^#[0-9A-Fa-f]{6}$/.test(globalColor)) {
+      return globalColor;
+    }
+    if (typeof globalColor === 'number') {
+      return globalColor;
+    }
+    return '#5865F2';
+  }
+
+  setColor(guildId, color) {
+    if (this.db?.setGuildSetting) {
+      this.db.setGuildSetting(guildId, 'color', color);
+    }
   }
 
   getFooter() {
     return this.get('footer') || '';
   }
 
-  getPrefix() {
-    return this.get('prefix') || '&';
+  getPrefix(guildId = null) {
+    const prefix = guildId ? this.db?.getGuildSetting(guildId, 'prefix') : null;
+    return prefix || this.get('prefix') || '&';
+  }
+
+  setPrefix(guildId, prefix) {
+    if (this.db?.setGuildSetting) {
+      this.db.setGuildSetting(guildId, 'prefix', prefix);
+    }
   }
 
   getCommandMode(commandKey) {

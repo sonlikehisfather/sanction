@@ -7,7 +7,7 @@ const BUTTON_PREFIX = 'user_sanction_list';
 const formatSanctionEntry = (sanction, index, page) => {
   const timestamp = Math.floor(sanction.created_at / 1000);
   const globalIndex = (page - 1) * ITEMS_PER_PAGE + index + 1;
-  return `**#${globalIndex}** <@${sanction.target_id}> (\`${sanction.target_id}\`)\nRaison : ${sanction.reason || '-'}\n<t:${timestamp}:F>`;
+  return `**#${globalIndex}** <@${sanction.target_id}> (\`${sanction.target_id}\`)\n> Raison ${sanction.reason || '-'}\n<t:${timestamp}:F>`;
 };
 
 const buildUserSanctionListEmbed = (configService, sanctions, targetUser, sanctionType, page = 1) => {

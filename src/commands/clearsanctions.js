@@ -10,10 +10,17 @@ const { buildClearSanctionsSuccessEmbed } = require('../utils/sanctionSuccessEmb
 
 const help = cloneHelpData(helpEntries.clearsanctions);
 
-
+const name = 'clearsanctions';
+const description = 'Efface toutes les sanctions d\'un membre.';
+const usage = 'clearsanctions <membre> <raison>';
+const aliases = ['clear-sanctions', 'clearsanctions', 'clearsanction'];
 
 module.exports = [
   {
+    name,
+    description,
+    usage,
+    aliases,
     prefix: {
       aliases: ['clear-sanctions', 'clearsanctions', 'clearsanction']
     },

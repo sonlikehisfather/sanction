@@ -5,7 +5,16 @@ const { createSanctionApplyCommand } = require('../helpers/createSanctionCommand
 
 const help = cloneHelpData(helpEntries.ban);
 
+const name = 'ban';
+const description = 'Bannit un membre.';
+const usage = 'ban <membre> [durée] [raison]';
+const aliases = ['ban'];
+
 module.exports = createSanctionApplyCommand({
+  name,
+  description,
+  usage,
+  aliases,
   description: 'Ban un membre',
   durationOption: {
     mode: 'optional',

@@ -1,7 +1,16 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const { buildEmbed } = require('../../utils/embedFactory');
 
+const name = 'bl-acces';
+const description = 'Gère la whitelist des utilisateurs.';
+const usage = '/bl-acces <option> [user]';
+const aliases = [];
+
 module.exports = {
+  name,
+  description,
+  usage,
+  aliases,
   data: new SlashCommandBuilder()
     .setName('bl-acces')
     .setDescription('Gérer la whitelist')
@@ -102,7 +111,7 @@ module.exports = {
         description: userList,
         fields: [
           {
-            name: 'Total',
+            name: '> Total',
             value: `${whitelisted.length} utilisateur(s)`,
             inline: true
           }

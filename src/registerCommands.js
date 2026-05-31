@@ -5,14 +5,12 @@ const { PermissionService } = require('./services/permissionService');
 const { CooldownService } = require('./services/cooldownService');
 const { SanctionService } = require('./services/sanctionService');
 const { CommandRegistry } = require('./commands/commandRegistry');
-const { BackupService } = require('./services/backupService');
 
 (async () => {
   const db = new DatabaseManager(config.databasePath, config.ownerId);
   const configService = new ConfigService(db, config);
   const permissionService = new PermissionService(db, configService);
   const cooldownService = new CooldownService(db);
-  const backupService = new BackupService(config);
   const fakeClient = { guilds: { cache: new Map() }, users: { fetch: async () => null } };
   const sanctionService = new SanctionService({ db, configService, client: fakeClient });
   const commandRegistry = new CommandRegistry({
@@ -21,8 +19,7 @@ const { BackupService } = require('./services/backupService');
     sanctionService,
     permissionService,
     cooldownService,
-    db,
-    backupService
+    db
   });
 
   try {

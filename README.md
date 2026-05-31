@@ -180,7 +180,6 @@ npm run register:slash
 ### Administrative Commands (Prefix)
 
 - `&owner [id|@user]` - List owners or toggle owner status
-- `&backup` - Open the backup management panel (owners only)
 - `&clear-sanctions <user> [reason]` - Clear all sanctions for a user
 - `&clearsanctions <user> [reason]` - Alias for clear-sanctions
 - `&clearsanction <user> [reason]` - Alias for clear-sanctions

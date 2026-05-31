@@ -12,7 +12,16 @@ const help = cloneHelpData(helpEntries.bluser || {
   examples: { prefix: '&bluser @utilisateur' }
 });
 
+const name = 'bluser';
+const description = 'Liste les blacklists effectuées par un modérateur.';
+const usage = 'bluser [modérateur]';
+const aliases = ['bluser'];
+
 module.exports = {
+  name,
+  description,
+  usage,
+  aliases,
   prefix: { aliases: ['bluser'] },
   handlePrefix: async ({ message, args, registry, db, configService }) => {
     const guild = message.guild;
@@ -53,7 +62,7 @@ module.exports = {
       
       if (sanctions.length === 0) {
         const embed = {
-          color: parseInt(configService.get('color').replace('#', ''), 16),
+          color: parseInt(configService.getColor().replace('#', ''), 16),
           description: `✗ Aucune blacklist effectuée par ${targetUser.username}.`
         };
         await message.reply({ embeds: [embed] });

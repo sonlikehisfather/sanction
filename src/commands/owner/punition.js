@@ -2,6 +2,11 @@ const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const { parseDuration } = require('../../utils/time');
 const { buildEmbed } = require('../../utils/embedFactory');
 
+const name = 'punition';
+const description = 'Punit un utilisateur en bloquant certaines commandes.';
+const usage = '/punition <utilisateur> <durée>';
+const aliases = [];
+
 const data = new SlashCommandBuilder()
   .setName('punition')
   .setDescription('Punir un utilisateur')
@@ -55,14 +60,14 @@ const handleSlash = async ({ interaction, db, configService, permissionService }
     const expiresTimestamp = Math.floor(expiresAt / 1000);
 
     const embed = buildEmbed(configService, {
-      description: `✓ <@${targetUser.id}> a été puni pendant ${durationStr}.\n\nLa punition expire: <t:${expiresTimestamp}:F>\n\n**Actions bloquées:** Ban, Blacklist, Unblacklist\n**Actions autorisées:** Unban`
+      description: `✓ <@${targetUser.id}> a été puni pendant ${durationStr}.\n\n> La punition expire <t:${expiresTimestamp}:F>\n\n**> Actions bloquées** Ban, Blacklist, Unblacklist\n**> Actions autorisées** Unban`
     });
 
     await interaction.reply({ embeds: [embed] });
 
     try {
       const dmEmbed = new (require('discord.js')).EmbedBuilder()
-        .setColor(parseInt(configService.get('color').replace('#', ''), 16))
+        .setColor(configService.getColor())
         .setDescription(`Tu as été puni sur **${interaction.guild.name}** pour une durée de **${durationStr}**.\nTu vas devoir être sage désormais et tu es obligé d'attendre la fin de cette durée.`)
         .setFooter({ text: configService.get('footer') });
       
@@ -79,6 +84,10 @@ const handleSlash = async ({ interaction, db, configService, permissionService }
 };
 
 module.exports = {
+  name,
+  description,
+  usage,
+  aliases,
   data,
   handleSlash
 };

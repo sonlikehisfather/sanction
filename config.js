@@ -39,10 +39,5 @@ module.exports = {
   enablePrefixCommands: process.env.ENABLE_PREFIX_COMMANDS !== 'false',
   enforceReason: process.env.ENFORCE_REASON !== 'false',
   databasePath: process.env.DATABASE_PATH || "./data/sanctions.sqlite",
-  defaultCooldownSeconds: parseInt(process.env.DEFAULT_COOLDOWN_SECONDS) || 5,
-
-  backupEnabled: process.env.BACKUP_ENABLED !== 'false',
-  backupIntervalMinutes: parseInt(process.env.BACKUP_INTERVAL_MINUTES) || 60,
-  maxBackups: parseInt(process.env.MAX_BACKUPS) || 10,
-  backupDir: process.env.BACKUP_DIR || "./data/backups"
+  defaultCooldownSeconds: parseInt(process.env.DEFAULT_COOLDOWN_SECONDS) || 5
 };

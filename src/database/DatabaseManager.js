@@ -127,6 +127,13 @@ class DatabaseManager {
         joined_at INTEGER NOT NULL,
         device_fingerprint TEXT
       );
+
+      CREATE TABLE IF NOT EXISTS guild_settings (
+        guild_id TEXT NOT NULL,
+        key TEXT NOT NULL,
+        value TEXT NOT NULL,
+        PRIMARY KEY (guild_id, key)
+      );
     `;
     this.db.exec(ddl);
 
@@ -151,6 +158,9 @@ class DatabaseManager {
       insertSetting: this.db.prepare(`INSERT INTO settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value`),
       deleteSetting: this.db.prepare(`DELETE FROM settings WHERE key = ?`),
       getSetting: this.db.prepare(`SELECT value FROM settings WHERE key = ?`),
+      insertGuildSetting: this.db.prepare(`INSERT INTO guild_settings (guild_id, key, value) VALUES (?, ?, ?) ON CONFLICT(guild_id, key) DO UPDATE SET value = excluded.value`),
+      deleteGuildSetting: this.db.prepare(`DELETE FROM guild_settings WHERE guild_id = ? AND key = ?`),
+      getGuildSetting: this.db.prepare(`SELECT value FROM guild_settings WHERE guild_id = ? AND key = ?`),
       insertSanction: this.db.prepare(`INSERT INTO sanctions (guild_id, type, target_id, target_tag, executor_id, executor_tag, reason, duration_ms, created_at, expires_at, active) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)`),
       updateSanctionRevocation: this.db.prepare(`UPDATE sanctions SET active = 0, revoked_at = ?, revoked_by_id = ?, revoked_reason = ? WHERE id = ?`),
       getSanctionById: this.db.prepare(`SELECT * FROM sanctions WHERE id = ?`),
@@ -227,6 +237,27 @@ class DatabaseManager {
 
   getSetting(key, defaultValue = null) {
     const row = this.statements.getSetting.get(key);
+    if (!row) {
+      return defaultValue;
+    }
+    try {
+      return JSON.parse(row.value);
+    } catch (error) {
+      return defaultValue;
+    }
+  }
+
+  setGuildSetting(guildId, key, value) {
+    const payload = JSON.stringify(value);
+    this.statements.insertGuildSetting.run(guildId, key, payload);
+  }
+
+  deleteGuildSetting(guildId, key) {
+    this.statements.deleteGuildSetting.run(guildId, key);
+  }
+
+  getGuildSetting(guildId, key, defaultValue = null) {
+    const row = this.statements.getGuildSetting.get(guildId, key);
     if (!row) {
       return defaultValue;
     }

@@ -221,87 +221,19 @@ const helpEntries = {
     },
     notes: ['Sans argument : liste.', 'Avec ID : ajoute ou retire (toggle).']
   },
-  backup: {
-    key: 'backup',
-    label: 'Backup',
-    category: 'owners',
-    description: 'Gérer les sauvegardes',
-    usage: {
-      prefix: '&backup'
-    },
-    examples: {
-      prefix: '&backup'
-    },
-    notes: ['Boutons Now, Del (par numéro) et Clear (avec confirmation).']
-  },
-  configToggle: {
-    key: 'configToggle',
-    label: 'Config toggle',
+  config: {
+    key: 'config',
+    label: 'Configuration',
     category: 'config',
-    description: 'Activer/désactiver une option du bot',
+    description: 'Configurer le bot',
     usage: {
-      prefix: '&config toggle <option> <on|off>'
+      prefix: '&config <subcommand>',
+      slash: '/botconfig'
     },
     examples: {
       prefix: '&config toggle enforceReason on'
     },
-    notes: ['Configurez via le panneau /botconfig.']
-  },
-  configRoles: {
-    key: 'configRoles',
-    label: 'Config rôles',
-    category: 'config',
-    description: 'Définir les rôles pour une action',
-    usage: {
-      prefix: '&config roles <action> <@role...>'
-    },
-    examples: {
-      prefix: '&config roles sanction:ban @Mod @Admin'
-    },
-    notes: ['Utilisez le mode "clear" pour retirer tous les rôles configurés.']
-  },
-  configCooldown: {
-    key: 'configCooldown',
-    label: 'Config cooldown',
-    category: 'config',
-    description: 'Régler le cooldown d\'une action',
-    usage: {
-      prefix: '&config cooldown <action> <secondes>'
-    },
-    examples: {
-      prefix: '&config cooldown sanction:ban 60'
-    },
-    notes: ['Mettez 0 pour désactiver le cooldown.']
-  },
-  configLimit: {
-    key: 'configLimit',
-    label: 'Config limite',
-    category: 'config',
-    description: 'Définir une limite d\'utilisation',
-    usage: {
-      prefix: '&config limit <action> <valeur> [fenetre_en_minutes]'
-    },
-    examples: {
-      prefix: '&config limit sanction:warn 10 20'
-    },
-    notes: ['Utilisez 0 ou "reset" pour retirer la limite.', 'Fenêtre 0 = 24h par défaut.']
-  },
-  configBot: {
-    key: 'configBot',
-    label: 'Config bot',
-    category: 'config',
-    description: 'Paramètres du bot',
-    usage: {
-      slash: '/botconfig'
-    },
-    examples: {
-      slash: '/botconfig'
-    },
-    notes: [
-      'Commande slash uniquement (pas de préfixe).',
-      'Réservée au propriétaire principal et aux owners secondaires du bot.',
-      'Permet de configurer le bot avec des menus interactifs simples.'
-    ]
+    notes: ['Subcommands: toggle, roles, cooldown, limit', 'Utilisez /botconfig pour le panneau complet.']
   },
   clearsanctions: {
     key: 'clearsanctions',
@@ -315,6 +247,56 @@ const helpEntries = {
       prefix: '&clear-sanctions @Membre Réhabilitation'
     },
     notes: ['Efface toutes les sanctions actives de l\'utilisateur dans le serveur.', 'La raison est obligatoire.', 'Configurable via /botconfig pour les permissions.', 'Nécessite la permission sanction:clear.']
+  },
+  blacces: {
+    key: 'blacces',
+    label: 'BL Accès',
+    category: 'config',
+    description: 'Gérer la whitelist',
+    usage: {
+      slash: '/bl-acces'
+    },
+    notes: ['Commande slash uniquement.']
+  },
+  delpunition: {
+    key: 'delpunition',
+    label: 'Del Punition',
+    category: 'sanctions',
+    description: 'Retirer une punition',
+    usage: {
+      slash: '/del-punition'
+    },
+    notes: ['Commande slash uniquement.']
+  },
+  invite: {
+    key: 'invite',
+    label: 'Invite',
+    category: 'assistance',
+    description: 'Lien d\'invitation du bot',
+    usage: {
+      slash: '/invite'
+    },
+    notes: ['Commande slash uniquement.', 'Réservée aux owners.']
+  },
+  protectuser: {
+    key: 'protectuser',
+    label: 'Protect User',
+    category: 'owners',
+    description: 'Protéger un utilisateur',
+    usage: {
+      slash: '/protect-user'
+    },
+    notes: ['Commande slash uniquement.', 'Réservée aux owners.']
+  },
+  punition: {
+    key: 'punition',
+    label: 'Punition',
+    category: 'sanctions',
+    description: 'Punir un utilisateur',
+    usage: {
+      slash: '/punition'
+    },
+    notes: ['Commande slash uniquement.']
   },
   help: {
     key: 'help',
