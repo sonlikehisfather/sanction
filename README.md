@@ -147,6 +147,10 @@ npm run register:slash
 
 - `&warn <user> [reason]` - Warn a user
 
+- `&clear-sanctions <user> [reason]` - Clear all sanctions for a user
+
+- `&help` - Interactive help menu with pagination (owners only)
+
 
 
 ### Administrative Commands (Slash)
@@ -157,11 +161,25 @@ npm run register:slash
 
 - `/invite` - Get the bot invite link (primary owner only)
 
-- `/bl-acces` - Manage server whitelist access (administrator only)
+- `/bl-acces` - Manage whitelist access (configuration)
 
-- `/protect-user` - Toggle protected user status (owners only)
+- `/del-punition` - Remove a punishment from a user
 
-- `/punition` - Apply a temporary punishment blocking ban/blacklist/unblacklist (owners only)
+- `/protect-user` - Protect a user from being banned/blacklisted (owners only)
+
+- `/punition` - Temporarily restrict a user from using sanction commands
+
+
+
+### Owner Commands (Prefix)
+
+
+
+- `&owner [id|@user]` - List owners or toggle owner status
+
+- `&setprefix <prefix>` - Change the server prefix (primary owner only)
+
+- `&setcolor <hex>` - Change the embed color (primary owner only)
 
 
 
@@ -177,10 +195,6 @@ npm run register:slash
 - `&sanctioninfo <id> <@user>` - Alias for infosanction
 - `&sinfo <id> <@user>` - Alias for infosanction
 
-### Administrative Commands (Prefix)
-
-- `&owner [id|@user]` - List owners or toggle owner status
-- `&clear-sanctions <user> [reason]` - Clear all sanctions for a user
 - `&clearsanctions <user> [reason]` - Alias for clear-sanctions
 - `&clearsanction <user> [reason]` - Alias for clear-sanctions
 

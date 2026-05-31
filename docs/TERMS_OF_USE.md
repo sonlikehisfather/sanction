@@ -44,4 +44,4 @@ Pour toute question, problème ou demande de suppression de données, contactez 
 ## 8. Modifications
 Ces conditions peuvent être modifiées à tout moment. Les modifications seront annoncées sur le serveur Discord du bot.
 
-**Dernière mise à jour : 17 mai 2026**
+**Dernière mise à jour : 31 mai 2026**

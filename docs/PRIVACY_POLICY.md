@@ -48,4 +48,4 @@ Pour toute question concernant vos données personnelles ou pour exercer vos dro
 ## 9. Modifications
 Cette politique peut être modifiée à tout moment. Les modifications seront annoncées sur le serveur Discord du bot et mises à jour dans ce document.
 
-**Dernière mise à jour : 17 mai 2026**
+**Dernière mise à jour : 31 mai 2026**
