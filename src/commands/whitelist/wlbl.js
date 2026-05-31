@@ -111,7 +111,7 @@ module.exports = {
         description: userList,
         fields: [
           {
-            name: '> Total',
+            name: '> ・Total.',
             value: `${whitelisted.length} utilisateur(s)`,
             inline: true
           }

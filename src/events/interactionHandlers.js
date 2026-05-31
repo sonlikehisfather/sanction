@@ -398,6 +398,16 @@ const setupInteractionHandlers = (client, commandRegistry, sanctionService, conf
       });
       return;
     }
+
+    const selectFlowPrefix = interaction.customId.split('_')[0];
+    if (['warn', 'tempmute'].includes(selectFlowPrefix)) {
+      await handleCategorizedSanctionInteraction(interaction, {
+        flowPrefix: selectFlowPrefix,
+        configService,
+        sanctionService
+      });
+      return;
+    }
   });
 
   client.on(Events.InteractionCreate, async (interaction) => {

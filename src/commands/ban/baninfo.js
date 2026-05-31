@@ -2,6 +2,7 @@ const { ActionKeys } = require('../../utils/actionKeys');
 const { helpEntries } = require('../definitions/helpContent');
 const { cloneHelpData, replyCommandError } = require('../helpers/usageMessages');
 const { buildEmbed } = require('../../utils/embedFactory');
+const { buildCommandErrorEmbed } = require('../../utils/sanctionSuccessEmbeds');
 
 const help = cloneHelpData(helpEntries.baninfo || {
   key: 'baninfo',

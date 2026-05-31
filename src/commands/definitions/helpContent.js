@@ -208,6 +208,84 @@ const helpEntries = {
       'Affiche l\'historique complet (actives et révoquées), filtrable par type.'
     ]
   },
+  infosanction: {
+    key: 'infosanction',
+    label: 'Info Sanction',
+    category: 'history',
+    description: 'Détails d\'une sanction',
+    usage: {
+      prefix: '&infosanction <sanction_id> <@utilisateur>'
+    },
+    examples: {
+      prefix: '&infosanction 2 @Toto'
+    },
+    notes: [
+      'Utilise le Sanction ID affiché dans &sanctions (numéro propre au membre, ex. #2).',
+      'Aliases : &sanctioninfo, &sinfo.'
+    ]
+  },
+  baninfo: {
+    key: 'baninfo',
+    label: 'Ban Info',
+    category: 'history',
+    description: 'Infos sur le ban actif d\'un membre',
+    usage: {
+      prefix: '&baninfo <@utilisateur>'
+    },
+    examples: {
+      prefix: '&baninfo @Toto'
+    },
+    notes: [
+      'Affiche uniquement le ban actif le plus récent.'
+    ]
+  },
+  banuser: {
+    key: 'banuser',
+    label: 'Ban User History',
+    category: 'history',
+    description: 'Voir les bans posés par un modérateur',
+    usage: {
+      prefix: '&banuser [@modérateur]'
+    },
+    examples: {
+      prefix: '&banuser @Modo'
+    },
+    notes: [
+      'Sans argument : affiche les bans que tu as toi-même posés.',
+      'Liste paginée avec boutons << >>.'
+    ]
+  },
+  blinfo: {
+    key: 'blinfo',
+    label: 'Blacklist Info',
+    category: 'history',
+    description: 'Infos sur la blacklist active d\'un membre',
+    usage: {
+      prefix: '&blinfo <@utilisateur>'
+    },
+    examples: {
+      prefix: '&blinfo @Joe'
+    },
+    notes: [
+      'Affiche uniquement la blacklist active la plus récente.'
+    ]
+  },
+  bluser: {
+    key: 'bluser',
+    label: 'Blacklist User History',
+    category: 'history',
+    description: 'Voir les blacklists posées par un modérateur',
+    usage: {
+      prefix: '&bluser [@modérateur]'
+    },
+    examples: {
+      prefix: '&bluser @Modo'
+    },
+    notes: [
+      'Sans argument : affiche les blacklists que tu as toi-même posées.',
+      'Liste paginée avec boutons << >>.'
+    ]
+  },
   owner: {
     key: 'owner',
     label: 'Owner',
@@ -220,6 +298,32 @@ const helpEntries = {
       prefix: '&owner @Staff'
     },
     notes: ['Sans argument : liste.', 'Avec ID : ajoute ou retire (toggle).']
+  },
+  setprefix: {
+    key: 'setprefix',
+    label: 'Set Prefix',
+    category: 'owners',
+    description: 'Changer le préfixe du bot',
+    usage: {
+      prefix: '&setprefix <nouveau_préfixe>'
+    },
+    examples: {
+      prefix: '&setprefix !'
+    },
+    notes: ['Réservé à l\'owner principal uniquement.']
+  },
+  setcolor: {
+    key: 'setcolor',
+    label: 'Set Color',
+    category: 'owners',
+    description: 'Changer la couleur des embeds',
+    usage: {
+      prefix: '&setcolor <#hex>'
+    },
+    examples: {
+      prefix: '&setcolor #FF5733'
+    },
+    notes: ['Réservé à l\'owner principal uniquement.', 'Format hexadécimal avec ou sans #.']
   },
   botconfig: {
     key: 'botconfig',

@@ -47,8 +47,8 @@ const FLOW_DEFINITIONS = {
       });
     },
     buildSuccessFields: ({ categoryConfig, stepConfig }) => [
-      { name: '・Catégorie', value: categoryConfig.label, inline: false },
-      { name: '・Durée', value: stepConfig.label, inline: true }
+      { name: '> ・Catégorie.', value: categoryConfig.label, inline: false },
+      { name: '> ・Durée.', value: stepConfig.label, inline: true }
     ]
   },
   warn: {
@@ -75,8 +75,8 @@ const FLOW_DEFINITIONS = {
         reason
       }),
     buildSuccessFields: ({ categoryConfig, stepConfig }) => [
-      { name: '・Categorie', value: categoryConfig.label, inline: false },
-      { name: '・Motif', value: extractMotifLabel(stepConfig.label), inline: true }
+      { name: '> ・Catégorie.', value: categoryConfig.label, inline: false },
+      { name: '> ・Motif.', value: extractMotifLabel(stepConfig.label), inline: true }
     ]
   }
 };
@@ -162,7 +162,7 @@ const applyCategorizedSanction = async ({
   const successEmbed = buildEmbed(configService, {
     title: definition.successTitle,
     fields: [
-      { name: '・Utilisateur', value: `<@${targetUser.id}>`, inline: true },
+      { name: '> ・Utilisateur.', value: `<@${targetUser.id}>`, inline: true },
       ...definition.buildSuccessFields({ categoryConfig, stepConfig, reason })
     ]
   });

@@ -28,37 +28,38 @@ const buildSanctionDetailEmbed = (configService, sanction, events = [], requeste
 
   const fields = [
     {
-      name: '> Type',
+      name: '> ・Type.',
       value: typeLine,
       inline: true
     },
     {
-      name: '> Raison',
-      value: sanction.reason || 'N/A',
-      inline: true
-    },
-    {
-      name: '> Date',
+      name: '> ・Date.',
       value: `${createdDate}${expiresDate}`,
       inline: true
     },
     {
-      name: '> Appliquée par',
+      name: '> ・Raison.',
+      value: sanction.reason || 'N/A',
+      inline: false
+    },
+    {
+      name: '> ・Author.',
       value: `<@${sanction.executor_id}>`,
       inline: true
     },
     {
-      name: '> Utilisateur sanctionné',
+      name: '> ・User.',
       value: sanction.target_tag || `<@${sanction.target_id}>`,
       inline: true
     }
   ];
 
-  if (events && events.length > 0) {
-    const eventList = events
+  const filteredEvents = (events || []).filter(e => e.action !== 'APPLIED');
+  if (filteredEvents.length > 0) {
+    const eventList = filteredEvents
       .map(e => `• ${e.action} par <@${e.actor_id}> ${discordTimestamp(e.timestamp, 'R')}`)
       .join('\n');
-    fields.push({ name: '> Événements', value: eventList, inline: false });
+    fields.push({ name: '> ・Événements.', value: eventList, inline: false });
   }
 
   let footer = null;
@@ -109,20 +110,20 @@ module.exports = {
 
     if (!sanctionIdStr || !userMention) {
       await message.reply(
-        buildUsageResponse(`Usage: ${commandPrefix}infosanction <id> <@user>`, help, 'prefix', commandPrefix, true)
+        buildUsageResponse('Arguments manquants.', help, 'prefix', commandPrefix, true, configService)
       );
       return;
     }
 
     const memberIndex = parseInt(sanctionIdStr, 10);
     if (isNaN(memberIndex) || memberIndex < 1) {
-      await message.reply(buildUsageResponse('L\'ID doit être un nombre (sanction du membre, ex. 1, 2, 3).', help, 'prefix', commandPrefix, true));
+      await message.reply(buildUsageResponse('L\'ID doit être un nombre (sanction du membre, ex. 1, 2, 3).', help, 'prefix', commandPrefix, true, configService));
       return;
     }
 
     const userId = registry.extractUserId(userMention);
     if (!userId) {
-      await message.reply(buildUsageResponse('Utilisateur invalide.', help, 'prefix', commandPrefix, true));
+      await message.reply(buildUsageResponse('Utilisateur invalide.', help, 'prefix', commandPrefix, true, configService));
       return;
     }
 
@@ -134,7 +135,7 @@ module.exports = {
     const sanction = sanctionService.getSanctionByMemberIndex(guild.id, userId, memberIndex);
     if (!sanction) {
       await message.reply(
-        buildUsageResponse(`Sanction ID #${memberIndex} introuvable pour cet utilisateur.`, help, 'prefix', commandPrefix, true)
+        buildUsageResponse(`Sanction ID #${memberIndex} introuvable pour cet utilisateur.`, help, 'prefix', commandPrefix, true, configService)
       );
       return;
     }

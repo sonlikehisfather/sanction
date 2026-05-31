@@ -52,17 +52,17 @@ const defaultEmbedFields = (record, reason, includeDuration = true) => {
 
   const fields = [
 
-    { name: '・Utilisateur', value: `<@${record.target_id}>`, inline: true }
+    { name: '> ・Utilisateur.', value: `<@${record.target_id}>`, inline: true }
 
   ];
 
   if (includeDuration) {
 
-    fields.push({ name: '・Durée', value: formatDuration(record.duration_ms), inline: true });
+    fields.push({ name: '> ・Durée.', value: formatDuration(record.duration_ms), inline: true });
 
   }
 
-  fields.push({ name: '・Raison', value: reason });
+  fields.push({ name: '> ・Raison.', value: reason });
 
   return fields;
 
@@ -72,9 +72,9 @@ const defaultEmbedFields = (record, reason, includeDuration = true) => {
 
 const defaultRevocationFields = (userId, reason) => [
 
-  { name: '・Utilisateur', value: `<@${userId}>`, inline: true },
+  { name: '> ・Utilisateur.', value: `<@${userId}>`, inline: true },
 
-  { name: '・Raison', value: reason }
+  { name: '> ・Raison.', value: reason }
 
 ];
 

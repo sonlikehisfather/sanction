@@ -29,9 +29,9 @@ const describeSanction = (sanction, memberIndex) => {
     : 'N/A';
 
   return `**Sanction ID #${memberIndex}** — ${typeDisplay}
-├ > Raison ${sanction.reason || 'N/A'}
-├ > Date ${dateStr}
-└ > Statut ${sanction.active ? ' Active' : ' Révoquée'}`;
+├ > ・Raison. ${sanction.reason || 'N/A'}
+├ > ・Date. ${dateStr}
+└ > ・Statut. ${sanction.active ? 'Active' : 'Révoquée'}`;
 };
 
 const buildListingEmbed = (configService, targetTag, sanctions, indexMap, page = 1) => {
