@@ -3,9 +3,11 @@ const { handleGuildMemberAdd } = require('./guildMemberAdd');
 const { sendAllNotifications } = require('../utils/termsOfUseNotifier');
 const { SANCTION_CHECK_INTERVAL } = require('../constants');
 const { setupOwnerPingEvent } = require('./ownerPingEvent');
+const { setupTwitchStatusEvent } = require('./twitchStatusEvent');
 
 const setupDiscordEvents = (client, db, sanctionService, configService, commandRegistry, setSchedulerHandle) => {
   
+  setupTwitchStatusEvent(client);
   setupOwnerPingEvent(client, configService, commandRegistry);
 
   client.on(Events.GuildMemberAdd, async (member) => {

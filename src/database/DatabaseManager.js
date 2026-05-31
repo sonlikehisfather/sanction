@@ -445,6 +445,14 @@ class DatabaseManager {
     this.statements.deleteGuildRole.run(guildId, roleType);
   }
 
+  deleteSanctionById(sanctionId) {
+    this.statements.deleteSanctionById.run(sanctionId);
+  }
+
+  deleteSanctionEvents(sanctionId) {
+    this.statements.deleteSanctionEvents.run(sanctionId);
+  }
+
   setWhitelistRoleLimit(guildId, roleId, actionKey, dailyLimit, cooldownMs) {
     this.statements.setWhitelistRoleLimit.run(guildId, roleId, actionKey, dailyLimit, cooldownMs);
   }
