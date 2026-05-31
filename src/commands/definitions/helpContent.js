@@ -221,19 +221,15 @@ const helpEntries = {
     },
     notes: ['Sans argument : liste.', 'Avec ID : ajoute ou retire (toggle).']
   },
-  config: {
-    key: 'config',
+  botconfig: {
+    key: 'botconfig',
     label: 'Configuration',
     category: 'config',
     description: 'Configurer le bot',
     usage: {
-      prefix: '&config <subcommand>',
       slash: '/botconfig'
     },
-    examples: {
-      prefix: '&config toggle enforceReason on'
-    },
-    notes: ['Subcommands: toggle, roles, cooldown, limit', 'Utilisez /botconfig pour le panneau complet.']
+    notes: ['Commande slash uniquement.', 'Panneau de configuration interactif.']
   },
   clearsanctions: {
     key: 'clearsanctions',
